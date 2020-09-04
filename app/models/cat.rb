@@ -21,6 +21,12 @@ class Cat < ApplicationRecord
   validates :sex, length: { is: 1 }
   validate :no_future_birthdate
 
+  has_many :rental_requests,
+    primary_key: :id,
+    foreign_key: :cat_id,
+    class_name: :CatRentalRequest,
+    dependent: :destroy
+
   def age
     time_ago_in_words(birthdate)
   end
