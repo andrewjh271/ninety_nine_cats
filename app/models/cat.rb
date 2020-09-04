@@ -28,6 +28,8 @@ class Cat < ApplicationRecord
   private
 
   def no_future_birthdate
+    return unless birthdate
+
     if birthdate > Date.today
       errors[:birthdate] << 'Cat\'s birthdate can\'t be in the future'
     end
