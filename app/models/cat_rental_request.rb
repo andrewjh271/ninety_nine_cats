@@ -45,6 +45,10 @@ class CatRentalRequest < ApplicationRecord
     update(status: 'DENIED')
   end
 
+  def pending?
+    status == 'PENDING'
+  end
+
   private
 
   def start_before_end

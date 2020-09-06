@@ -2,4 +2,15 @@
   Start: <%= cat_rental_request.start_date %>;
   End: <%= cat_rental_request.end_date %>;
   Status: <%= cat_rental_request.status %>
+
+  <% if cat_rental_request.pending? %>
+    <form method='POST' style='display: inline;'>
+      <button type='submit'
+        formaction='<%= approve_cat_rental_request_url(cat_rental_request) %>'>Approve</button>
+      <button type='submit'
+        formaction='<%= deny_cat_rental_request_url(cat_rental_request) %>'>Deny</button>
+    </form>
+  <% end %>
+  <br>
+  <br>
 </li>
