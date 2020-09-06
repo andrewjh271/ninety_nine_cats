@@ -49,6 +49,10 @@ class CatRentalRequest < ApplicationRecord
     status == 'PENDING'
   end
 
+  def cat_name
+    cat.name
+  end
+
   private
 
   def start_before_end

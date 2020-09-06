@@ -15,7 +15,6 @@ class CatRentalRequestsController < ApplicationController
 
   def show
     @cat_rental_request = CatRentalRequest.find_by(id: params[:id])
-    @cat = Cat.find_by(id: @cat_rental_request.cat_id)
     render :show
   end
 
