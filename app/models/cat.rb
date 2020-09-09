@@ -17,9 +17,9 @@ class Cat < ApplicationRecord
   COLORS = %w[black white tuxedo calico orange tortoiseshell]
 
   validates :birthdate, :color, :name, :sex, :description, presence: true
-  validates :color, inclusion: { in: COLORS }
-  validates :sex, length: { is: 1 }
-  validate :no_future_birthdate
+  validates :color, inclusion: { in: COLORS }, if: -> { color }
+  validates :sex, length: { is: 1 }, if: -> { sex }
+  validate :no_future_birthdate, if: -> { birthdate }
 
   has_many :rental_requests,
     primary_key: :id,
@@ -34,8 +34,6 @@ class Cat < ApplicationRecord
   private
 
   def no_future_birthdate
-    return unless birthdate
-
     if birthdate > Date.today
       errors[:birthdate] << 'Cat\'s birthdate can\'t be in the future'
     end
