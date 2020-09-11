@@ -3,3 +3,10 @@
 <ul>
   <%= render @cats %>
 </ul>
+
+<%#= link_to 'Add a new cat', new_cat_url %>
+
+<form method='GET'>
+  <button type='submit'
+    formaction='<%= new_cat_url %>'>Add a Cat</button>
+</form>
