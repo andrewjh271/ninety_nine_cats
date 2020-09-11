@@ -22,8 +22,6 @@ class Cat < ApplicationRecord
   validate :no_future_birthdate, if: -> { birthdate }
 
   has_many :rental_requests,
-    primary_key: :id,
-    foreign_key: :cat_id,
     class_name: :CatRentalRequest,
     dependent: :destroy
 
