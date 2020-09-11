@@ -18,7 +18,7 @@ class Cat < ApplicationRecord
 
   validates :birthdate, :color, :name, :sex, :description, presence: true
   validates :color, inclusion: { in: COLORS }, if: -> { color }
-  validates :sex, length: { is: 1 }, if: -> { sex }
+  validates :sex, inclusion: %w[M F], if: -> { sex }
   validate :no_future_birthdate, if: -> { birthdate }
 
   has_many :rental_requests,
