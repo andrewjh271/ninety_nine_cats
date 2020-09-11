@@ -27,5 +27,5 @@
 <br>
 <h5>Rental Requests:</h5>
 <ul>
-  <%= render @rental_requests %>
+  <%= render @cat.rental_requests.order(:start_date) %>
 </ul>
