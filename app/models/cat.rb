@@ -21,12 +21,20 @@ class Cat < ApplicationRecord
   validates :sex, inclusion: %w[M F], if: -> { sex }
   validate :no_future_birthdate, if: -> { birthdate }
 
+  belongs_to :owner,
+    class_name: :User,
+    foreign_key: :user_id
+
   has_many :rental_requests,
     class_name: :CatRentalRequest,
     dependent: :destroy
 
   def age
     time_ago_in_words(birthdate)
+  end
+
+  def owner_name
+    owner.username
   end
 
   private

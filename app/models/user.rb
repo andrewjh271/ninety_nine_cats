@@ -18,6 +18,8 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  has_many :cats
+
   def self.find_by_credentials(username, password)
     user = self.find_by(username: username)
     if user
@@ -51,3 +53,8 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 end
+
+# andrew - dvorak
+# coolcollie - lassie
+# nicole - mandolin
+# diana - flutefluteflute ? fluteflute
