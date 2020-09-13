@@ -21,6 +21,7 @@ class CatRentalRequest < ApplicationRecord
   validates :status, inclusion: { in: %w[APPROVED PENDING DENIED] }, if: -> { status }
   validate :start_before_end, if: -> { start_date && end_date }
   validate :does_not_overlap_approved_request, if: -> { start_date && end_date }
+  validate :cannot_rent_your_own_cat, if: -> { cat_id && user_id }
 
   def overlapping_requests
     CatRentalRequest.where(cat_id: cat_id)
@@ -68,18 +69,20 @@ class CatRentalRequest < ApplicationRecord
   private
 
   def start_before_end
-    return unless start_date && end_date
-
     unless start_date < end_date
       errors[:base] << 'Start date must come before end date'
     end
   end
 
   def does_not_overlap_approved_request
-    return unless [cat_id, start_date, end_date].none?(nil)
-
     if overlapping_approved_requests.exists?
       errors[:base] << 'Dates conflict with an existing approved request'
+    end
+  end
+
+  def cannot_rent_your_own_cat
+    if cat.owner == requester
+      errors[:user_id] << 'Owner cannot rent their own cat!'
     end
   end
 end
