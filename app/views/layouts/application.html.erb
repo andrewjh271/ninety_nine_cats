@@ -10,6 +10,7 @@
 
   <header>
 
+    <%= link_to 'Home', cats_url %>
     <% if current_user %>
       <%= current_user.username %>
       <form method='POST' action='<%= sessions_url %>' style='display: inline;'>
@@ -19,7 +20,6 @@
       </form>
     <% else %>
       <form method='GET' style='display: inline;'>
-        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
         <button type='submit'
           formaction='<%= new_sessions_url %>'>Login</button>
         <button type='submit'
