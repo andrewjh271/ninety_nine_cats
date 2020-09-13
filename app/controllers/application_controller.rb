@@ -15,4 +15,13 @@ class ApplicationController < ActionController::Base
   def already_signed_in
     redirect_to cats_url if current_user
   end
+
+  def require_current_user
+    redirect_to new_sessions_url unless current_user
+  end
+
+  def user_must_own_cat
+    @cat = current_user.cats.find_by(id: params[:id])
+    redirect_to cats_url unless @cat
+  end
 end

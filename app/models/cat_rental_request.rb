@@ -53,6 +53,10 @@ class CatRentalRequest < ApplicationRecord
     cat.name
   end
 
+  def cat_owner
+    cat.owner
+  end
+
   private
 
   def start_before_end

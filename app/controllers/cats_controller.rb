@@ -1,4 +1,7 @@
 class CatsController < ApplicationController
+  before_action :require_current_user, only: [:new, :edit, :create, :update]
+  before_action :user_must_own_cat, only: [:edit, :update]
+
   def index
     @cats = Cat.all
     render :index
@@ -18,6 +21,7 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.owner = current_user
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -26,12 +30,12 @@ class CatsController < ApplicationController
   end
 
   def edit
-    @cat = Cat.find_by(id: params[:id])
+    # @cat is set in :only_owner_can_edit callback
     render :edit
   end
 
   def update
-    @cat = Cat.find_by(id: params[:id])
+    # @cat is set in :only_owner_can_edit callback
     if @cat.update(cat_params)
       redirect_to cat_url(@cat)
     else
@@ -44,4 +48,5 @@ class CatsController < ApplicationController
   def cat_params
     params.require(:cat).permit(:birthdate, :color, :name, :sex, :description)
   end
+
 end

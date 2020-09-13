@@ -3,8 +3,9 @@
   End: <%= cat_rental_request.end_date %>;
   Status: <%= cat_rental_request.status %>
 
-  <% if cat_rental_request.pending? %>
+  <% if cat_rental_request.pending? && cat_rental_request.cat_owner == current_user %>
     <form method='POST' style='display: inline;'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 
       <button type='submit'
         formaction='<%= approve_cat_rental_request_url(cat_rental_request) %>'>Approve</button>
