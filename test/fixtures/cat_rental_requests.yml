@@ -9,6 +9,7 @@
 #  status     :string           default("PENDING")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          default(-1), not null
 #
 
 # This model initially had no columns defined. If you add columns to the

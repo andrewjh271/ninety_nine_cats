@@ -9,14 +9,18 @@
 #  status     :string           default("PENDING")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          default(-1), not null
 #
 class CatRentalRequest < ApplicationRecord
   belongs_to :cat
+  belongs_to :requester,
+    class_name: :User,
+    foreign_key: :user_id
 
   validates :start_date, :end_date, presence: true
-  validates :status, inclusion: { in: %w[APPROVED PENDING DENIED] }
-  validate :start_before_end
-  validate :does_not_overlap_approved_request
+  validates :status, inclusion: { in: %w[APPROVED PENDING DENIED] }, if: -> { status }
+  validate :start_before_end, if: -> { start_date && end_date }
+  validate :does_not_overlap_approved_request, if: -> { start_date && end_date }
 
   def overlapping_requests
     CatRentalRequest.where(cat_id: cat_id)
@@ -55,6 +59,10 @@ class CatRentalRequest < ApplicationRecord
 
   def cat_owner
     cat.owner
+  end
+
+  def cat_requester
+    requester.username
   end
 
   private

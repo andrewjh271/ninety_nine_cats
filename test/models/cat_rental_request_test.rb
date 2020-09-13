@@ -9,6 +9,7 @@
 #  status     :string           default("PENDING")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          default(-1), not null
 #
 require 'test_helper'
 

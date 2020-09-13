@@ -1,5 +1,7 @@
 <h3>New Cat Rental Request</h3>
 
+<%= render 'shared/errors' %>
+
 <form action='<%= cat_rental_requests_path %>' method='POST'>
   <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 

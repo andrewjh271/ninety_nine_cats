@@ -1,7 +1,8 @@
 <li>
   Start: <%= cat_rental_request.start_date %>;
   End: <%= cat_rental_request.end_date %>;
-  Status: <%= cat_rental_request.status %>
+  Status: <%= cat_rental_request.status %>;
+  Requester: <%= cat_rental_request.cat_requester %>
 
   <% if cat_rental_request.pending? && cat_rental_request.cat_owner == current_user %>
     <form method='POST' style='display: inline;'>
