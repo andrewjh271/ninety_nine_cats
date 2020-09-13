@@ -9,25 +9,23 @@
   </head>
 
   <header>
+
     <% if current_user %>
       <%= current_user.username %>
-      <% display = 'Logout' %>
-      <% action = sessions_url %>
-      <% method = 'DELETE' %>
+      <form method='POST' action='<%= sessions_url %>' style='display: inline;'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='<%= 'DELETE' %>'>
+        <button type='submit'>Logout</button>
+      </form>
     <% else %>
-      <% display = 'Login' %>
-      <% action = new_sessions_url %>
-      <% method = 'GET' %>
+      <form method='GET' style='display: inline;'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <button type='submit'
+          formaction='<%= new_sessions_url %>'>Login</button>
+        <button type='submit'
+          formaction='<%= new_user_url %>'>Create new account</button>
+      </form>
     <% end %>
-
-    <form method='POST' action='<%= action %>' style='display: inline;'>
-      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-
-      <input type='hidden' name='_method' value='<%= method %>'>
-
-      <input type='submit' value=<%= display %>>
-
-    </form>
       
   </header>
 
