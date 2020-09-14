@@ -1,0 +1,17 @@
+<h3> <%= current_user.username %> </h3>
+
+<div> Cats: </div>
+<br>
+<%= render current_user.cats %>
+<br>
+
+<div> Rental requests: </div>
+<br>
+<%= render current_user.cat_rental_requests %>
+
+
+
+
+<div> Logged in devices: </div>
+<br>
+<%= render current_user.sessions %>

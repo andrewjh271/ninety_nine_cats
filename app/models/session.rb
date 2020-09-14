@@ -8,6 +8,8 @@
 #  browser_name     :string
 #  platform_name    :string
 #  platform_version :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 class Session < ApplicationRecord
   belongs_to :user

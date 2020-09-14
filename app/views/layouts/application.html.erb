@@ -10,14 +10,21 @@
 
   <header>
 
-    <%= link_to 'Home', cats_url %>
+    <div>
+        <form method='GET' action='<%= cats_url %>' style='display: inline;'>
+          <button type='submit'>Home</button>
+        </form>
+
     <% if current_user %>
-      <%= current_user.username %>
-      <form method='POST' action='<%= sessions_url %>' style='display: inline;'>
-        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-        <input type='hidden' name='_method' value='<%= 'DELETE' %>'>
-        <button type='submit'>Logout</button>
-      </form>
+      
+        <form method='GET' action='<%= users_url %>' style='display: inline;'>
+          <button type='submit'><%= current_user.username %></button>
+        </form>
+        <form method='POST' action='<%= sessions_url %>' style='display: inline;'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='<%= 'DELETE' %>'>
+          <button type='submit'>Logout</button>
+        </form>
     <% else %>
       <form method='GET' style='display: inline;'>
         <button type='submit'
@@ -26,7 +33,7 @@
           formaction='<%= new_user_url %>'>Create new account</button>
       </form>
     <% end %>
-      
+    </div>
   </header>
 
   <body>
