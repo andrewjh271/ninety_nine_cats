@@ -1,5 +1,11 @@
 <li>
   Browser: <%= session.browser_name %>, 
   Platform: <%= session.platform_name + session.platform_version %>,
-  Logged in at: <%= session.created_at %>
+  Logged in at: <%= session.created_at %>,
+  <form method='POST' action='<%= sessions_url %>' style='display: inline'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='_method' value='<%= 'DELETE' %>'>
+    <input type='hidden' name='remote_logout' value='<%= session.session_token %>'>
+    <button type='submit'>Logout</button>
+  </form>
 </li>

@@ -23,10 +23,15 @@ class SessionsController < ApplicationController
 
   def destroy
     # Session.find_by(session_token: session[:session_token], user: current_user).destroy
-    current_user.sessions.find_by(session_token: session[:session_token]).destroy
-    current_user.try(:reset_session_token!)
-    session[:session_token] = nil
-    redirect_to cats_url
+    if params['remote_logout'] && params['remote_logout'] != session[:session_token]
+      current_user.sessions.find_by(session_token: params['remote_logout']).destroy
+      redirect_to users_url
+    else
+      current_user.sessions.find_by(session_token: session[:session_token]).destroy
+      current_user.try(:reset_session_token!)
+      session[:session_token] = nil
+      redirect_to cats_url
+    end
   end
 
   

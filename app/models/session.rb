@@ -13,11 +13,4 @@
 #
 class Session < ApplicationRecord
   belongs_to :user
-
 end
-
-# browser = Browser.new(request.env['HTTP_USER_AGENT'], accept_language: "en-us")
-# browser.name
-# browser.platform.name
-# browser.platform.version
-#
