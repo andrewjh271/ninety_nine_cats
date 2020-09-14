@@ -30,11 +30,6 @@
 
 <% if @cat.owner == current_user %>
     <br>
-
-
-
-
-
     <form method='GET' action='<%= edit_cat_url(@cat) %>' style='display:inline;'>
         <button type='submit'>Edit Cat</button>
     </form>

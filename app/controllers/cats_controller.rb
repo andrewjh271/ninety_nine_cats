@@ -4,6 +4,7 @@ class CatsController < ApplicationController
 
   def index
     @cats = Cat.all
+    # fail
     render :index
   end
 
