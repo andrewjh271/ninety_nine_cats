@@ -12,6 +12,8 @@
 #  user_id    :integer          default(-1), not null
 #
 class CatRentalRequest < ApplicationRecord
+  include ActionView::Helpers::DateHelper
+
   belongs_to :cat
   belongs_to :requester,
     class_name: :User,
@@ -20,6 +22,7 @@ class CatRentalRequest < ApplicationRecord
   validates :start_date, :end_date, presence: true
   validates :status, inclusion: { in: %w[APPROVED PENDING DENIED] }, if: -> { status }
   validate :start_before_end, if: -> { start_date && end_date }
+  validate :starts_in_the_future, if: -> { start_date && end_date }
   validate :does_not_overlap_approved_request, if: -> { start_date && end_date }
   validate :cannot_rent_your_own_cat, if: -> { cat_id && user_id }
 
@@ -83,6 +86,12 @@ class CatRentalRequest < ApplicationRecord
   def cannot_rent_your_own_cat
     if cat.owner == requester
       errors[:user_id] << 'Owner cannot rent their own cat!'
+    end
+  end
+
+  def starts_in_the_future
+    if start_date < Date.today
+      errors[:start_date] << 'Start date must be in the future'
     end
   end
 end

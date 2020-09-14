@@ -4,12 +4,20 @@ class ApplicationController < ActionController::Base
   def login_user(user)
     user.reset_session_token!
     session[:session_token] = user.session_token
+
+    browser = Browser.new(request.env['HTTP_USER_AGENT'], accept_language: "en-us")
+    Session.create!(session_token: user.session_token,
+                    user_id: user.id,
+                    browser_name: browser.name,
+                    platform_name: browser.platform.name,
+                    platform_version: browser.platform.version)
   end
 
   def current_user
     return nil unless session[:session_token]
 
-    @current_user ||= User.find_by(session_token: session[:session_token])
+    # @current_user ||= User.find_by(session_token: session[:session_token])
+    @current_user ||= Session.find_by(session_token: session[:session_token]).try(:user)
   end
 
   def already_signed_in

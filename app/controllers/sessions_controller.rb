@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    Session.find_by(session_token: current_user.session_token).destroy
     current_user.try(:reset_session_token!)
     session[:session_token] = nil
     redirect_to cats_url
