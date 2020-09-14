@@ -1,6 +1,6 @@
 class CatsController < ApplicationController
   before_action :require_current_user, only: [:new, :edit, :create, :update]
-  before_action :user_must_own_cat, only: [:edit, :update]
+  before_action :user_must_own_cat, only: [:edit, :update, :destroy]
 
   def index
     @cats = Cat.all
@@ -30,17 +30,23 @@ class CatsController < ApplicationController
   end
 
   def edit
-    # @cat is set in :only_owner_can_edit callback
+    # @cat is set in :user_must_own_cat callback
     render :edit
   end
 
   def update
-    # @cat is set in :only_owner_can_edit callback
+    # @cat is set in :user_must_own_cat callback
     if @cat.update(cat_params)
       redirect_to cat_url(@cat)
     else
       render :edit
     end
+  end
+
+  def destroy
+    # @cat is set in :user_must_own_cat callback
+    @cat.destroy
+    redirect_to cats_url
   end
 
   private

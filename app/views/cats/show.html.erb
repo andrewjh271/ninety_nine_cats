@@ -28,6 +28,24 @@
     </tbody>
 </table>
 
+<% if @cat.owner == current_user %>
+    <br>
+
+
+
+
+
+    <form method='GET' action='<%= edit_cat_url(@cat) %>' style='display:inline;'>
+        <button type='submit'>Edit Cat</button>
+    </form>
+    <form method='POST' action='<%= cat_url(@cat) %>' style='display:inline;'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='<%= 'DELETE' %>'>
+        <button type='submit'>Delete Cat</button>
+    </form>
+
+<% end %>
+
 <br>
 <h5>Rental Requests:</h5>
 <ul>
