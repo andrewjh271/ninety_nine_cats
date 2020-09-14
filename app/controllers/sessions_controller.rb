@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    # Session.find_by(session_token: session[:session_token], user: current_user).destroy
+    # params['remote_logout'] is used if User is logging out a Session from their account page
     if params['remote_logout'] && params['remote_logout'] != session[:session_token]
       current_user.sessions.find_by(session_token: params['remote_logout']).destroy
       redirect_to users_url

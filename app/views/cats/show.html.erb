@@ -44,5 +44,5 @@
 <br>
 <h5>Rental Requests:</h5>
 <ul>
-  <%= render @cat.rental_requests.order(:start_date).includes(:requester) %>
+  <%= render @cat.rental_requests.order(:start_date).includes(:requester, :cat) %>
 </ul>

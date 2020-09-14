@@ -7,10 +7,10 @@
 
 <div> Rental requests: </div>
 <br>
-<%= render current_user.cat_rental_requests %>
-
-
-
+<%= render current_user
+  .cat_rental_requests
+  .order(:start_date)
+  .includes(:requester, :cat => :owner) %>
 
 <div> Logged in devices: </div>
 <br>
