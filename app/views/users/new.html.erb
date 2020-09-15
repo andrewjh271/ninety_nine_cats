@@ -1,22 +1,4 @@
 <h3>Create a new account</h3>
 
 <%= render 'shared/errors' %>
-
-<form action='<%= users_url %>' method='POST'>
-  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-
-  <label for='username'>Username: </label>
-  <input id='username'
-         name='user[username]'
-         type='text'
-         value='<%= @user.username %>'>
-  <br>
-
-  <label for='password'>Password: </label>
-  <input id='password'
-         name='user[password]'
-         type='text'
-         value='<%= @user.password %>'>
-
-  <input type='submit' value='Create'>
-</form>
+<%= render 'shared/user_form', user: @user, login: false %>
