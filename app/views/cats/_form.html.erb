@@ -9,37 +9,29 @@
 
   <label for='name'>Name</label>
     <input id='name' name='cat[name]' type='text' value='<%= @cat.name %>'>
-
   <br>
 
   <label for='birthdate'>Birthdate</label>
   <input id='birthdate' name='cat[birthdate]' type='date' value='<%= @cat.birthdate %>'>
-
   <br>
 
   <label for='color'>Color</label>
   <select id='color' name='cat[color]'>
     <option disabled <%= 'selected' if @cat.color.nil? %>>--Select--</option>
-    <option value='black' <%= 'selected' if @cat.color == 'black' %>>Black</option>
-    <option value='white' <%= 'selected' if @cat.color == 'white' %>>White</option>
-    <option value='tuxedo' <%= 'selected' if @cat.color == 'tuxedo' %>>Tuxedo</option>
-    <option value='calico' <%= 'selected' if @cat.color == 'calico' %>>Calico</option>
-    <option value='orange' <%= 'selected' if @cat.color == 'orange' %>>Orange</option>
-    <option value='tortoiseshell' <%= 'selected' if @cat.color == 'tortoiseshell' %>>Tortoiseshell</option>
+    <% Cat::COLORS.each do |color| %>
+      <option value='<%= color %>'<%= 'selected' if @cat.color == color %>><%= color %></option> 
+    <% end %>
   </select>
-
   <br>
 
   <input id='female' type='radio' name='cat[sex]' value='F' <%= 'checked' if @cat.sex == 'F' %>>
   <label for='female'>Female</label>
   <input id='male' type='radio' name='cat[sex]' value='M' <%= 'checked' if @cat.sex == 'M' %>>
   <label for='male'>Male</label>
-
   <br>
 
   <label for='description'>Description</label>
   <textarea name='cat[description]'><%= @cat.description %></textarea>
-
   <br>
 
   <input type='submit' value='<%= edit ? 'Update Cat' : 'Enter New Cat'%>'>
