@@ -12,7 +12,7 @@
     <li>Logged in at: <%= time_tag(session.created_at) + ' UTC' %></li>
 
     <%= button_to 'Logout',
-        sessions_url,
+        sessions_path,
         method: :delete, 
         params: { remote_logout: session.session_token } %>
   </ul>

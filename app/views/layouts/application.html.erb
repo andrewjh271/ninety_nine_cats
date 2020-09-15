@@ -11,16 +11,16 @@
   <header>
 
     <div>
-        <form method='GET' action='<%= cats_url %>' style='display: inline;'>
+        <form method='GET' action='<%= cats_path %>' style='display: inline;'>
           <button type='submit'>Home</button>
         </form>
 
     <% if current_user %>
       
-        <form method='GET' action='<%= users_url %>' style='display: inline;'>
+        <form method='GET' action='<%= users_path %>' style='display: inline;'>
           <button type='submit'><%= current_user.username %></button>
         </form>
-        <form method='POST' action='<%= sessions_url %>' style='display: inline;'>
+        <form method='POST' action='<%= sessions_path %>' style='display: inline;'>
           <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
           <input type='hidden' name='_method' value='<%= 'DELETE' %>'>
           <button type='submit'>Logout</button>
@@ -28,9 +28,9 @@
     <% else %>
       <form method='GET' style='display: inline;'>
         <button type='submit'
-          formaction='<%= new_sessions_url %>'>Login</button>
+          formaction='<%= new_sessions_path %>'>Login</button>
         <button type='submit'
-          formaction='<%= new_user_url %>'>Create new account</button>
+          formaction='<%= new_user_path %>'>Create new account</button>
       </form>
     <% end %>
     </div>

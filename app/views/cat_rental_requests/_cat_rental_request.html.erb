@@ -10,9 +10,9 @@
     <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 
       <button type='submit'
-        formaction='<%= approve_cat_rental_request_url(cat_rental_request) %>'>Approve</button>
+        formaction='<%= approve_cat_rental_request_path(cat_rental_request) %>'>Approve</button>
       <button type='submit'
-        formaction='<%= deny_cat_rental_request_url(cat_rental_request) %>'>Deny</button>
+        formaction='<%= deny_cat_rental_request_path(cat_rental_request) %>'>Deny</button>
     </form>
   <% end %>
   <br>

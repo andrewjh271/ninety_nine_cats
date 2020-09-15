@@ -1,4 +1,4 @@
-<% action = login ? sessions_url : users_url %>
+<% action = login ? sessions_path : users_path %>
 <% submit = login ? 'Login' : 'Create' %>
 
 <form action='<%= action %>' method='POST'>
