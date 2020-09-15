@@ -25,11 +25,7 @@ class User < ApplicationRecord
 
   def self.find_by_credentials(username, password)
     user = self.find_by(username: username)
-    if user
-      user.is_password?(password) ? user : nil
-    else
-      nil #render new
-    end
+    user.try(:is_password?, password) ? user : nil
   end
 
   def password=(password)
@@ -60,4 +56,4 @@ end
 # andrew - dvorak
 # coolcollie - lassie
 # nicole - mandolin
-# diana - flutefluteflute ? fluteflute
+# diana - fluteflute
