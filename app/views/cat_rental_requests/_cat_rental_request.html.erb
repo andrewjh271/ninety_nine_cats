@@ -6,7 +6,7 @@
   Requester: <%= cat_rental_request.cat_requester %>
 
   <% if cat_rental_request.pending? && cat_rental_request.cat_owner == current_user %>
-    <form method='POST' style='display: inline;'>
+    <form method='POST'>
     <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 
       <button type='submit'

@@ -10,10 +10,9 @@
     <li>Browser: <%= session.browser_name %>
         Platform: <%= session.platform_name + session.platform_version %></li>
     <li>Logged in at: <%= time_tag(session.created_at) + ' UTC' %></li>
-    <form method='POST' action='<%= sessions_url %>' style='display: inline'>
-      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-      <input type='hidden' name='_method' value='<%= 'DELETE' %>'>
-      <input type='hidden' name='remote_logout' value='<%= session.session_token %>'>
-      <button type='submit'>Logout</button>
-    </form>
+
+    <%= button_to 'Logout',
+        sessions_url,
+        method: :delete, 
+        params: { remote_logout: session.session_token } %>
   </ul>
