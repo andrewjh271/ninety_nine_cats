@@ -21,7 +21,7 @@
           <button type='submit'><%= current_user.username %></button>
         </form>
         <form method='POST' action='<%= sessions_path %>' style='display: inline;'>
-          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <%= auth_token %>
           <input type='hidden' name='_method' value='<%= 'DELETE' %>'>
           <button type='submit'>Logout</button>
         </form>

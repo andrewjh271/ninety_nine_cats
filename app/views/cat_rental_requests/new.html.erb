@@ -3,7 +3,7 @@
 <%= render 'shared/errors' %>
 
 <form action='<%= cat_rental_requests_path %>' method='POST'>
-  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+  <%= auth_token %>
 
   <label for='cat'>Choose a cat: </label>
   <select id='cat' name='cat_rental_request[cat_id]'>
