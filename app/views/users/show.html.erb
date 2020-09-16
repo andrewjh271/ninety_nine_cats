@@ -14,3 +14,7 @@
 
 <div> Logged in devices: </div>
 <%= render current_user.sessions %>
+
+<% content_for :footer do %>
+  <p><%= current_user.username %>'s account.</p>
+<% end %>

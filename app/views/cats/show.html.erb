@@ -46,3 +46,7 @@
 <ul>
   <%= render @cat.rental_requests.order(:start_date).includes(:requester, :cat) %>
 </ul>
+
+<% content_for :footer do %>
+  <p>Cat Cat Cat Cat Cat</p>
+<% end %>
