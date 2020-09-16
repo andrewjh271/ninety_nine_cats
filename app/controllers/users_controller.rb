@@ -10,8 +10,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      msg = UserMailer.welcome_email(@user)
-      msg.deliver_now
+      # msg = UserMailer.welcome_email(@user)
+      # msg.deliver_now
+      # Not used for Heroku app — no real mail setup exists
 
       login_user(@user)
       redirect_to cats_url
