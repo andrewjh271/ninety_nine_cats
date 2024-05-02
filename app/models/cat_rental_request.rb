@@ -41,7 +41,7 @@ class CatRentalRequest < ApplicationRecord
   end
 
   def approve!
-    return false unless status == 'PENDING'
+    return false unless pending?
 
     transaction do
       overlapping_pending_requests.each(&:deny!)
